@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
 
@@ -22,14 +23,18 @@ public class InputManager : MonoBehaviour
 
     [Header("Inputs")]
     public bool b_Input;
-    public bool reset_Input;
+    public bool openMenu_Input;
     public bool jump_Input;
+
+    [Header("Menu")]
+    public GameObject menuCanvas;
 
     private void Awake()
     {
         animatorManager = GetComponent<AnimatorManager>();
         playerLocomotion = GetComponent<PlayerLocomotion>();
         playerRigidbody = GetComponent<Rigidbody>();
+        menuCanvas.SetActive(false);
     }
 
     private void OnEnable()
@@ -44,7 +49,7 @@ public class InputManager : MonoBehaviour
             playerControls.PlayerActions.B.performed += i => b_Input = true;
             playerControls.PlayerActions.B.canceled += i => b_Input = false;
 
-            playerControls.PlayerActions.Reset.performed += i => reset_Input = true;
+            playerControls.PlayerActions.OpenMenu.performed += i => openMenu_Input = true;
 
             playerControls.PlayerActions.Jump.performed += i => jump_Input = true;        
         }
@@ -62,17 +67,7 @@ public class InputManager : MonoBehaviour
         HandleMovementInput();
         HandleSprintingInput();
         HandleJumpingInput();
-        HandleRespawnInput();
-   
-    }
-    
-    public void HandleRespawnInput()
-    {
-        if (reset_Input)
-        {
-            reset_Input = false;
-            playerRigidbody.transform.position = new Vector3(-0.29664f, 1.1f, 5.4176f);
-        }
+        OpenMenu();
     }
 
     private void HandleMovementInput()
@@ -109,4 +104,21 @@ public class InputManager : MonoBehaviour
         }
     }
 
-}
+    public void OpenMenu()
+    {
+        if (openMenu_Input)
+        {
+            openMenu_Input = false;
+            playerControls.PlayerMovement.Disable();
+            menuCanvas.SetActive(!menuCanvas.activeSelf);
+        }
+
+            if (menuCanvas.activeSelf == false)
+            {
+                playerControls.PlayerMovement.Enable();
+                openMenu_Input = false;
+                
+            }
+        }
+    }
+
