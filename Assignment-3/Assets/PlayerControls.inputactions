@@ -227,9 +227,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Reset",
+                    "name": "OpenMenu",
                     "type": "Button",
-                    "id": "b8183c6f-5f2f-4ebd-9916-ad39e2afdbb8",
+                    "id": "c87ad1bd-ff8b-44a6-9897-56f1d1a585fa",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -272,12 +272,12 @@
                 },
                 {
                     "name": "",
-                    "id": "c7f5e989-0298-4e2d-83c9-fd90369bf82b",
-                    "path": "<Keyboard>/k",
+                    "id": "4cbc680a-e94a-4b35-9db1-1720f7789842",
+                    "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Reset",
+                    "action": "OpenMenu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
