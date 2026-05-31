@@ -320,6 +320,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DevCombatMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""a5b72830-9691-406b-8f7b-2b6ff882cf90"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -366,6 +375,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""OpenMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""26387b8d-b2fd-4e1f-b0af-7263dbdab572"",
+                    ""path"": ""<Keyboard>/k"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DevCombatMenu"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -381,6 +401,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_PlayerActions_Jump = m_PlayerActions.FindAction("Jump", throwIfNotFound: true);
         m_PlayerActions_B = m_PlayerActions.FindAction("B", throwIfNotFound: true);
         m_PlayerActions_OpenMenu = m_PlayerActions.FindAction("OpenMenu", throwIfNotFound: true);
+        m_PlayerActions_DevCombatMenu = m_PlayerActions.FindAction("DevCombatMenu", throwIfNotFound: true);
     }
 
     ~@PlayerControls()
@@ -572,6 +593,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerActions_Jump;
     private readonly InputAction m_PlayerActions_B;
     private readonly InputAction m_PlayerActions_OpenMenu;
+    private readonly InputAction m_PlayerActions_DevCombatMenu;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player Actions".
     /// </summary>
@@ -595,6 +617,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "PlayerActions/OpenMenu".
         /// </summary>
         public InputAction @OpenMenu => m_Wrapper.m_PlayerActions_OpenMenu;
+        /// <summary>
+        /// Provides access to the underlying input action "PlayerActions/DevCombatMenu".
+        /// </summary>
+        public InputAction @DevCombatMenu => m_Wrapper.m_PlayerActions_DevCombatMenu;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -630,6 +656,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @OpenMenu.started += instance.OnOpenMenu;
             @OpenMenu.performed += instance.OnOpenMenu;
             @OpenMenu.canceled += instance.OnOpenMenu;
+            @DevCombatMenu.started += instance.OnDevCombatMenu;
+            @DevCombatMenu.performed += instance.OnDevCombatMenu;
+            @DevCombatMenu.canceled += instance.OnDevCombatMenu;
         }
 
         /// <summary>
@@ -650,6 +679,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @OpenMenu.started -= instance.OnOpenMenu;
             @OpenMenu.performed -= instance.OnOpenMenu;
             @OpenMenu.canceled -= instance.OnOpenMenu;
+            @DevCombatMenu.started -= instance.OnDevCombatMenu;
+            @DevCombatMenu.performed -= instance.OnDevCombatMenu;
+            @DevCombatMenu.canceled -= instance.OnDevCombatMenu;
         }
 
         /// <summary>
@@ -733,5 +765,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnOpenMenu(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "DevCombatMenu" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnDevCombatMenu(InputAction.CallbackContext context);
     }
 }

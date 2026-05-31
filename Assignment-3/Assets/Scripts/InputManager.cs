@@ -25,9 +25,11 @@ public class InputManager : MonoBehaviour
     public bool b_Input;
     public bool openMenu_Input;
     public bool jump_Input;
+    public bool devCombat_Input;
 
     [Header("Menu")]
     public GameObject menuCanvas;
+    public GameObject combatMenu;
 
     private void Awake()
     {
@@ -35,6 +37,7 @@ public class InputManager : MonoBehaviour
         playerLocomotion = GetComponent<PlayerLocomotion>();
         playerRigidbody = GetComponent<Rigidbody>();
         menuCanvas.SetActive(false);
+        combatMenu.SetActive(false);
     }
 
     private void OnEnable()
@@ -51,7 +54,9 @@ public class InputManager : MonoBehaviour
 
             playerControls.PlayerActions.OpenMenu.performed += i => openMenu_Input = true;
 
-            playerControls.PlayerActions.Jump.performed += i => jump_Input = true;        
+            playerControls.PlayerActions.Jump.performed += i => jump_Input = true;
+            
+            playerControls.PlayerActions.DevCombatMenu.performed += i => devCombat_Input = true;
         }
 
         playerControls.Enable();
@@ -68,6 +73,7 @@ public class InputManager : MonoBehaviour
         HandleSprintingInput();
         HandleJumpingInput();
         OpenMenu();
+        OpenCombatDevMenu();
     }
 
     private void HandleMovementInput()
@@ -120,5 +126,23 @@ public class InputManager : MonoBehaviour
                 
             }
         }
+
+    public void OpenCombatDevMenu()
+    {
+        if (devCombat_Input)
+        {
+            devCombat_Input = false;
+            playerControls.PlayerMovement.Disable();
+            combatMenu.SetActive(!combatMenu.activeSelf);
+        }
+
+            if (combatMenu.activeSelf == false)
+            {
+                playerControls.PlayerMovement.Enable();
+                devCombat_Input = false;
+                
+            }
+        }
+
     }
 
