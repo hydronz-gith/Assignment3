@@ -1909,7 +1909,7 @@ AudioListener:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1278705984}
-  m_Enabled: 1
+  m_Enabled: 0
 --- !u!20 &1278705987
 Camera:
   m_ObjectHideFlags: 0
@@ -2516,6 +2516,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c707b9b3a76144b0fb8fdd0cb419d966, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+--- !u!114 &1650939453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1650939442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7221be8cd0b8b4adeb0c6b15ea465fe9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CombatHandler
+  playerMaxHP: 100
+  enemyMaxHP: 80
+  winDamage: 25
+  tieDamage: 10
+  loseDamage: 0
+  resultDisplayTime: 2
+  OnCombatStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHealthChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  OnRoundResolved:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCombatEnd:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1772067596
 GameObject:
   m_ObjectHideFlags: 0
@@ -2671,7 +2701,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1852158726
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3059,7 +3089,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 879045393}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -3225,6 +3255,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7410436008568007785, guid: b9336abcb20564ca493954f39233189b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1650939447}
+    - targetCorrespondingSourceObject: {fileID: 7410436008568007785, guid: b9336abcb20564ca493954f39233189b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1650939453}
   m_SourcePrefab: {fileID: 100100000, guid: b9336abcb20564ca493954f39233189b, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
@@ -3242,3 +3275,4 @@ SceneRoots:
   - {fileID: 492013652}
   - {fileID: 496397582}
   - {fileID: 1308884216}
+  - {fileID: 2098879811}
