@@ -243,6 +243,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Inventory",
+                    "type": "Button",
+                    "id": "3da97e25-2722-4bbd-8cf2-a1f4a7b7f39a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -298,6 +307,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "DevCombatMenu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5993e9ef-6bb7-48a9-afdb-25b044502a32",
+                    "path": "<Keyboard>/i",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Inventory",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

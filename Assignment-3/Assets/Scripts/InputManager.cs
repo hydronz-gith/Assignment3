@@ -9,6 +9,8 @@ public class InputManager : MonoBehaviour
     PlayerControls playerControls;
     PlayerLocomotion playerLocomotion;
     AnimatorManager animatorManager;
+    InventoryHandler inventoryUI;
+    InventoryDescription itemDescription;
     Rigidbody playerRigidbody;
     
     [Header("Camera")]
@@ -26,10 +28,12 @@ public class InputManager : MonoBehaviour
     public bool openMenu_Input;
     public bool jump_Input;
     public bool devCombat_Input;
+    public bool inventory_Input;
 
     [Header("Menu")]
     public GameObject menuCanvas;
     public GameObject combatMenu;
+    public GameObject inventoryMenu;
 
     private void Awake()
     {
@@ -57,6 +61,8 @@ public class InputManager : MonoBehaviour
             playerControls.PlayerActions.Jump.performed += i => jump_Input = true;
             
             playerControls.PlayerActions.DevCombatMenu.performed += i => devCombat_Input = true;
+
+            playerControls.PlayerActions.Inventory.performed += i => inventory_Input = true;
         }
 
         playerControls.Enable();
@@ -74,6 +80,7 @@ public class InputManager : MonoBehaviour
         HandleJumpingInput();
         OpenMenu();
         OpenCombatDevMenu();
+        OpenInventory();
     }
 
     private void HandleMovementInput()
@@ -144,5 +151,22 @@ public class InputManager : MonoBehaviour
             }
         }
 
+    public void OpenInventory()
+    {
+        if (inventory_Input)
+        {
+            inventory_Input = false;
+            //Great example of calling a method from another class.
+            // If we want InventoryHandler, we put that and how we want to refer to it here.
+            // In this case its inventoryUI; now we call a method that's WITHIN that class.
+            inventoryMenu.SetActive(!inventoryMenu.activeSelf);
+            //inventoryUI.Show();
+        }
+
+        if (inventoryMenu.activeSelf == false)
+        {
+            inventory_Input = false;
+        }
     }
+}
 

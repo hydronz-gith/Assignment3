@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5063c6af2985154da25267919c0f348, type: 3}
+  m_Script: {fileID: 11500000, guid: e888f5793b386514aa275f9768bcdb37, type: 3}
   m_Name: Suspicious Stew
-  m_EditorClassIdentifier: Assembly-CSharp::ItemHandler
-  id: 
-  description: 
-  prefab: {fileID: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::ItemSO
+  <IsStackable>k__BackingField: 0
+  <MaxStackSize>k__BackingField: 1
+  <Name>k__BackingField: Suspicious Stew
+  <Description>k__BackingField: This thick stew smells strangely familiar...
+  <ItemImage>k__BackingField: {fileID: 0}
