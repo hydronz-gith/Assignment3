@@ -23,20 +23,21 @@ public class InventorySO : ScriptableObject
             inventoryItems.Add(InventoryItem.GetEmptyItem());
         }
     }
-        public int AddItem(ItemSO item, int quantity)
+        
+    public int AddItem(ItemSO item, int quantity)
+    {
+        if(item.IsStackable == false)
         {
-            if(item.IsStackable == false)
+            //for (int i = 0; i < inventoryItems.Count; i++)
             {
-                for (int i = 0; i < inventoryItems.Count; i++)
+                while(quantity > 0 && IsInventoryFull() == false)
                 {
-                    while(quantity > 0 && IsInventoryFull() == false)
-                    {
-                        quantity -= AddItemToFirstFreeSlot(item, 1); //may have problems with this line
-                    }
-                    InformAboutChange();
-                    return quantity;
+                    quantity -= AddItemToFirstFreeSlot(item, 1); //may have problems with this line
                 }
+                InformAboutChange();
+                return quantity;
             }
+        }
             quantity = AddStackableItem(item, quantity);
             InformAboutChange();
             return quantity;

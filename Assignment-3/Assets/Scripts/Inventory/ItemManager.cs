@@ -5,8 +5,9 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 using UnityEngine.EventSystems;
+using UnityEditor.Rendering;
 
-    public class ItemManager : MonoBehaviour
+public class ItemManager : MonoBehaviour, IPointerClickHandler
     {
         [SerializeField]
         private Image itemImage;
@@ -16,6 +17,10 @@ using UnityEngine.EventSystems;
 
         [SerializeField]
         private TMP_Text itemName;
+
+        InventoryDescription description;
+
+        private string currentItemName = "";
 
         public event Action<ItemManager> OnItemClicked,
         OnRightMouseBtnClick;
@@ -32,13 +37,17 @@ using UnityEngine.EventSystems;
         {
             // This hides the image; may not be necessary
             itemImage.gameObject.SetActive(false);
+            quantityTxt.text = "";
+            currentItemName = "";
             empty = true;
         }
 
         private void Deselect()
         {
-            //does nothing; idk if return does either tbh
-            return;
+            if (!empty)
+        {
+            itemName.SetText(currentItemName);
+        }
         }
 
         public void SetData(Sprite sprite, int quantity)
@@ -46,13 +55,24 @@ using UnityEngine.EventSystems;
             itemImage.gameObject.SetActive(true);
             itemImage.sprite = sprite;
             quantityTxt.text = quantity + "";
+            currentItemName = name;
+
+            if(itemName != null)
+        {
+            itemName.SetText(name);
+        }
             empty = false;
         }
 
         public void Select()
         {
-            itemName.SetText($"> ");
-            //may need something here about "show description"
+            if (empty) return;
+
+            if(itemName != null)
+        {
+            itemName.SetText($"> {currentItemName}");
+        }
+ 
         }
 
         public void OnPointerClick(PointerEventData pointerData)
@@ -62,7 +82,9 @@ using UnityEngine.EventSystems;
                 OnRightMouseBtnClick?.Invoke(this);
             }
             else
-            {
+            {                
+                Debug.Log($"[ItemManager] Current Stored name is {currentItemName}");
+                Select();
                 OnItemClicked?.Invoke(this);
             }
         }
