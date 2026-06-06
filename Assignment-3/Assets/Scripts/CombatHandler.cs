@@ -7,7 +7,7 @@ public class CombatHandler : MonoBehaviour
 {
     public static CombatHandler Instance { 
         get; 
-        private set;
+        set;
         }
 
         [Header("Combat Stats")]
@@ -26,22 +26,24 @@ public class CombatHandler : MonoBehaviour
         public float resultDisplayTime = 2f;
 
         public int PlayerHP
-    {
-        get;
-        private set;
-    }
+        {
+            get;
+            set;
+        }
+
         public int EnemyHP
-    {
-        get;
-        private set;
-    }
+        {
+            get;
+            set;
+        }
+
         public enum CombatChoice{Attack, Block, Dodge}
         public enum TurnState{Waiting, Resolving, GameOver}
         public TurnState CurrentState
-    {
-        get;
-        private set;
-    }
+        {
+            get;
+            set;
+        }
 
         public UnityEvent OnCombatStart;
         public UnityEvent<int, int> OnHealthChanged;
@@ -100,7 +102,7 @@ public class CombatHandler : MonoBehaviour
         StartCoroutine(ResolveRound(playerChoice));
     }
 
-    private IEnumerator ResolveRound(CombatChoice playerchoice)
+    public IEnumerator ResolveRound(CombatChoice playerchoice)
     {
         CombatChoice enemyChoice = EnemyAI.PickChoice();
 

@@ -329,6 +329,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Inventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""3da97e25-2722-4bbd-8cf2-a1f4a7b7f39a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -386,6 +395,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""DevCombatMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5993e9ef-6bb7-48a9-afdb-25b044502a32"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -402,6 +422,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_PlayerActions_B = m_PlayerActions.FindAction("B", throwIfNotFound: true);
         m_PlayerActions_OpenMenu = m_PlayerActions.FindAction("OpenMenu", throwIfNotFound: true);
         m_PlayerActions_DevCombatMenu = m_PlayerActions.FindAction("DevCombatMenu", throwIfNotFound: true);
+        m_PlayerActions_Inventory = m_PlayerActions.FindAction("Inventory", throwIfNotFound: true);
     }
 
     ~@PlayerControls()
@@ -594,6 +615,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerActions_B;
     private readonly InputAction m_PlayerActions_OpenMenu;
     private readonly InputAction m_PlayerActions_DevCombatMenu;
+    private readonly InputAction m_PlayerActions_Inventory;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player Actions".
     /// </summary>
@@ -621,6 +643,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "PlayerActions/DevCombatMenu".
         /// </summary>
         public InputAction @DevCombatMenu => m_Wrapper.m_PlayerActions_DevCombatMenu;
+        /// <summary>
+        /// Provides access to the underlying input action "PlayerActions/Inventory".
+        /// </summary>
+        public InputAction @Inventory => m_Wrapper.m_PlayerActions_Inventory;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -659,6 +685,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @DevCombatMenu.started += instance.OnDevCombatMenu;
             @DevCombatMenu.performed += instance.OnDevCombatMenu;
             @DevCombatMenu.canceled += instance.OnDevCombatMenu;
+            @Inventory.started += instance.OnInventory;
+            @Inventory.performed += instance.OnInventory;
+            @Inventory.canceled += instance.OnInventory;
         }
 
         /// <summary>
@@ -682,6 +711,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @DevCombatMenu.started -= instance.OnDevCombatMenu;
             @DevCombatMenu.performed -= instance.OnDevCombatMenu;
             @DevCombatMenu.canceled -= instance.OnDevCombatMenu;
+            @Inventory.started -= instance.OnInventory;
+            @Inventory.performed -= instance.OnInventory;
+            @Inventory.canceled -= instance.OnInventory;
         }
 
         /// <summary>
@@ -772,5 +804,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnDevCombatMenu(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Inventory" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnInventory(InputAction.CallbackContext context);
     }
 }
