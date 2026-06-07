@@ -209,7 +209,7 @@
             "id": "8e65c7b2-fc26-4678-8d4a-c9a04dc411d0",
             "actions": [
                 {
-                    "name": "Jump",
+                    "name": "DevLoseDamage",
                     "type": "Button",
                     "id": "b9ecf199-b127-4572-851b-56f2af95c113",
                     "expectedControlType": "",
@@ -258,11 +258,11 @@
                 {
                     "name": "",
                     "id": "c7dce12e-f9d9-4215-855b-60a7e8a89ddf",
-                    "path": "<Keyboard>/space",
+                    "path": "<Keyboard>/l",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Jump",
+                    "action": "DevLoseDamage",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

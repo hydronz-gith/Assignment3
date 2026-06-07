@@ -295,7 +295,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             ""id"": ""8e65c7b2-fc26-4678-8d4a-c9a04dc411d0"",
             ""actions"": [
                 {
-                    ""name"": ""Jump"",
+                    ""name"": ""DevLoseDamage"",
                     ""type"": ""Button"",
                     ""id"": ""b9ecf199-b127-4572-851b-56f2af95c113"",
                     ""expectedControlType"": """",
@@ -344,11 +344,11 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""c7dce12e-f9d9-4215-855b-60a7e8a89ddf"",
-                    ""path"": ""<Keyboard>/space"",
+                    ""path"": ""<Keyboard>/l"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Jump"",
+                    ""action"": ""DevLoseDamage"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -418,7 +418,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_PlayerMovement_Camera = m_PlayerMovement.FindAction("Camera", throwIfNotFound: true);
         // Player Actions
         m_PlayerActions = asset.FindActionMap("Player Actions", throwIfNotFound: true);
-        m_PlayerActions_Jump = m_PlayerActions.FindAction("Jump", throwIfNotFound: true);
+        m_PlayerActions_DevLoseDamage = m_PlayerActions.FindAction("DevLoseDamage", throwIfNotFound: true);
         m_PlayerActions_B = m_PlayerActions.FindAction("B", throwIfNotFound: true);
         m_PlayerActions_OpenMenu = m_PlayerActions.FindAction("OpenMenu", throwIfNotFound: true);
         m_PlayerActions_DevCombatMenu = m_PlayerActions.FindAction("DevCombatMenu", throwIfNotFound: true);
@@ -611,7 +611,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     // Player Actions
     private readonly InputActionMap m_PlayerActions;
     private List<IPlayerActionsActions> m_PlayerActionsActionsCallbackInterfaces = new List<IPlayerActionsActions>();
-    private readonly InputAction m_PlayerActions_Jump;
+    private readonly InputAction m_PlayerActions_DevLoseDamage;
     private readonly InputAction m_PlayerActions_B;
     private readonly InputAction m_PlayerActions_OpenMenu;
     private readonly InputAction m_PlayerActions_DevCombatMenu;
@@ -628,9 +628,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// </summary>
         public PlayerActionsActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         /// <summary>
-        /// Provides access to the underlying input action "PlayerActions/Jump".
+        /// Provides access to the underlying input action "PlayerActions/DevLoseDamage".
         /// </summary>
-        public InputAction @Jump => m_Wrapper.m_PlayerActions_Jump;
+        public InputAction @DevLoseDamage => m_Wrapper.m_PlayerActions_DevLoseDamage;
         /// <summary>
         /// Provides access to the underlying input action "PlayerActions/B".
         /// </summary>
@@ -673,9 +673,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_PlayerActionsActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_PlayerActionsActionsCallbackInterfaces.Add(instance);
-            @Jump.started += instance.OnJump;
-            @Jump.performed += instance.OnJump;
-            @Jump.canceled += instance.OnJump;
+            @DevLoseDamage.started += instance.OnDevLoseDamage;
+            @DevLoseDamage.performed += instance.OnDevLoseDamage;
+            @DevLoseDamage.canceled += instance.OnDevLoseDamage;
             @B.started += instance.OnB;
             @B.performed += instance.OnB;
             @B.canceled += instance.OnB;
@@ -699,9 +699,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         /// <seealso cref="PlayerActionsActions" />
         private void UnregisterCallbacks(IPlayerActionsActions instance)
         {
-            @Jump.started -= instance.OnJump;
-            @Jump.performed -= instance.OnJump;
-            @Jump.canceled -= instance.OnJump;
+            @DevLoseDamage.started -= instance.OnDevLoseDamage;
+            @DevLoseDamage.performed -= instance.OnDevLoseDamage;
+            @DevLoseDamage.canceled -= instance.OnDevLoseDamage;
             @B.started -= instance.OnB;
             @B.performed -= instance.OnB;
             @B.canceled -= instance.OnB;
@@ -777,12 +777,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     public interface IPlayerActionsActions
     {
         /// <summary>
-        /// Method invoked when associated input action "Jump" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "DevLoseDamage" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnJump(InputAction.CallbackContext context);
+        void OnDevLoseDamage(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "B" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>

@@ -12,6 +12,8 @@ public class InputManager : MonoBehaviour
     InventoryHandler inventoryUI;
     InventoryDescription itemDescription;
     Rigidbody playerRigidbody;
+    CombatHandler combatHandler;
+    PlayerHP playerHP;
     
     [Header("Camera")]
     public Vector2 movementInput;
@@ -26,9 +28,9 @@ public class InputManager : MonoBehaviour
     [Header("Inputs")]
     public bool b_Input;
     public bool openMenu_Input;
-    public bool jump_Input;
     public bool devCombat_Input;
     public bool inventory_Input;
+    public bool devDamage_Input;
 
     [Header("Menu")]
     public GameObject menuCanvas;
@@ -57,12 +59,12 @@ public class InputManager : MonoBehaviour
             playerControls.PlayerActions.B.canceled += i => b_Input = false;
 
             playerControls.PlayerActions.OpenMenu.performed += i => openMenu_Input = true;
-
-            playerControls.PlayerActions.Jump.performed += i => jump_Input = true;
             
             playerControls.PlayerActions.DevCombatMenu.performed += i => devCombat_Input = true;
 
             playerControls.PlayerActions.Inventory.performed += i => inventory_Input = true;
+
+            playerControls.PlayerActions.DevLoseDamage.performed += i => devDamage_Input = true;
         }
 
         playerControls.Enable();
@@ -77,10 +79,10 @@ public class InputManager : MonoBehaviour
     {
         HandleMovementInput();
         HandleSprintingInput();
-        HandleJumpingInput();
         OpenMenu();
         OpenCombatDevMenu();
         OpenInventory();
+        DevDamageInput();
     }
 
     private void HandleMovementInput()
@@ -108,12 +110,13 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    private void HandleJumpingInput()
+    public void DevDamageInput()
     {
-        if (jump_Input)
+        if (devDamage_Input)
         {
-            jump_Input = false;
-            playerLocomotion.HandleJumping();
+            devDamage_Input = false;
+            playerHP.Reduce(damage:10);
+            //combatHandler.loseDamage = 1;
         }
     }
 

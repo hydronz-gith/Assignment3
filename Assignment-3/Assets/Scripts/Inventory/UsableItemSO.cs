@@ -6,13 +6,13 @@ using UnityEngine;
 public class UsableItemSO : ItemSO, IItemAction
 
 {
-    private CombatHandler health;
+    private PlayerHP health;
 
     public string ActionName => "Use";
 
     public bool PerformAction(GameObject character)
     {
-        health.playerMaxHP = 10;
+        health.maxHealth = 10;
         return true;
     }
 }

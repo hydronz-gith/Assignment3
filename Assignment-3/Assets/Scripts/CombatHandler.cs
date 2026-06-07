@@ -10,8 +10,9 @@ public class CombatHandler : MonoBehaviour
         set;
         }
 
+        public PlayerHP playerHP;
+
         [Header("Combat Stats")]
-        public int playerMaxHP = 100;
         public int enemyMaxHP = 80;
 
         [Header("Damage Values")]
@@ -24,12 +25,6 @@ public class CombatHandler : MonoBehaviour
 
         [Header("Timing")]
         public float resultDisplayTime = 2f;
-
-        public int PlayerHP
-        {
-            get;
-            set;
-        }
 
         public int EnemyHP
         {
@@ -85,12 +80,11 @@ public class CombatHandler : MonoBehaviour
     
     public void StartCombat()
     {
-        PlayerHP = playerMaxHP;
         EnemyHP = enemyMaxHP;
         CurrentState = TurnState.Waiting;
 
         OnCombatStart?.Invoke();
-        OnHealthChanged?.Invoke(PlayerHP, EnemyHP);
+        //OnHealthChanged?.Invoke(PlayerHP, EnemyHP);
     }
 
     public void PlayerChoose(CombatChoice playerChoice)
@@ -104,12 +98,12 @@ public class CombatHandler : MonoBehaviour
 
     public IEnumerator ResolveRound(CombatChoice playerchoice)
     {
+
         CombatChoice enemyChoice = EnemyAI.PickChoice();
 
         int outcome = Resolve(playerchoice, enemyChoice);
 
         int damageToEnemy = 0;
-        int damageToPlayer = 0;
         string resultText;
 
         switch(outcome)
@@ -119,25 +113,24 @@ public class CombatHandler : MonoBehaviour
                 resultText = "You win the round!";
                 break;
             case -1:
-                damageToPlayer = loseDamage;
+                playerHP.Reduce(loseDamage);
                 resultText = "You lose the round!";
                 break;
             default:
                 damageToEnemy = tieDamage;
-                damageToPlayer = tieDamage;
+                playerHP.Reduce(tieDamage);
                 resultText = "It's a tie!";
                 break;
         }
 
-        PlayerHP = Mathf.Max(0, PlayerHP - damageToPlayer);
         EnemyHP = Mathf.Max(0, EnemyHP - damageToEnemy);
 
-        OnHealthChanged?.Invoke(PlayerHP, EnemyHP);
+        //OnHealthChanged?.Invoke(PlayerHP, EnemyHP);
         OnRoundResolved?.Invoke(playerchoice, enemyChoice, resultText);
 
         yield return new WaitForSeconds(resultDisplayTime);
 
-        if(PlayerHP <= 0 || EnemyHP <= 0)
+        if(EnemyHP <= 0)
         {
             CurrentState = TurnState.GameOver;
             bool playerWon = EnemyHP <= 0;
