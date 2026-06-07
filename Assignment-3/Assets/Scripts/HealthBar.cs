@@ -7,17 +7,10 @@ using UnityEngine.UIElements.Experimental;
 
 public class HealthBar : MonoBehaviour
 {
-    [SerializeField]
-    private CombatHandler health;
-
-    [SerializeField]
-    private RectTransform barRect;
-
-    [SerializeField]
-    private RectMask2D mask;
-
-    [SerializeField]
-    private TMP_Text hpIndicator;
+    [SerializeField] public PlayerHP health;
+    [SerializeField] private RectTransform barRect;
+    [SerializeField] private RectMask2D mask;
+    [SerializeField] private TMP_Text hpIndicator;
 
     private float maxRightMask;
     private float initialRightMask;
@@ -25,17 +18,17 @@ public class HealthBar : MonoBehaviour
     private void Start()
     {        
         maxRightMask = barRect.rect.width - mask.padding.x - mask.padding.z;
-        hpIndicator.SetText($"{health.PlayerHP} / {health.playerMaxHP}");
+        hpIndicator.SetText($"{health.currentHealth.Value} / {health.maxHealth}");
         initialRightMask = mask.padding.z;
     }
 
     public void SetValue(int newValue)
     {
-        var targetWidth = newValue * maxRightMask / health.playerMaxHP;
+        var targetWidth = newValue * maxRightMask / health.maxHealth;
         var newRightMask = maxRightMask + initialRightMask - targetWidth;
         var padding = mask.padding;
         padding.z = newRightMask;
         mask.padding = padding;
-        hpIndicator.SetText($"{newValue} / {health.playerMaxHP}");
+        hpIndicator.SetText($"{newValue} / {health.maxHealth}");
     }
 }
