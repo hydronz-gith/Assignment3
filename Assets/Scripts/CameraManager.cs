@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
+using Mono.Cecil.Cil;
 using UnityEngine;
 
 public class CameraManager : MonoBehaviour
@@ -13,6 +14,9 @@ public class CameraManager : MonoBehaviour
     private float defaultPosition;
     private Vector3 cameraFollowVelocity = Vector3.zero;
     private Vector3 cameraVectorPosition;
+    
+    //public Camera overworldCamera;
+    //public Camera combatCamera;
 
     public float cameraCollisionOffSet = 0.2f;
     public float minimumCollisionOffSet = 0.2f;

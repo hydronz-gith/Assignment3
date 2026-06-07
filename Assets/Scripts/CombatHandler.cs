@@ -1,8 +1,10 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using NUnit.Framework.Internal;
 
+#if FALSE
 public class CombatHandler : MonoBehaviour
 {
     public static CombatHandler Instance { 
@@ -11,6 +13,10 @@ public class CombatHandler : MonoBehaviour
         }
 
         public PlayerHP playerHP;
+        public CameraManager cameraManager;
+
+        [SerializeField]
+        public GameObject enemy;
 
         [Header("Combat Stats")]
         public int enemyMaxHP = 80;
@@ -72,17 +78,21 @@ public class CombatHandler : MonoBehaviour
         }
         Instance = this;
     }
-
-    private void Start()
+    private void OnTriggerEnter(Collider enemy)
     {
         StartCombat();
     }
     
     public void StartCombat()
     {
+        
         EnemyHP = enemyMaxHP;
         CurrentState = TurnState.Waiting;
+            
+        SceneManager.LoadScene("Combat");
 
+        cameraManager.HandleAllCameraMovement();
+    
         OnCombatStart?.Invoke();
         //OnHealthChanged?.Invoke(PlayerHP, EnemyHP);
     }
@@ -142,3 +152,4 @@ public class CombatHandler : MonoBehaviour
         }
     }
 }
+#endif

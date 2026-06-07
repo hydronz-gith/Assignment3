@@ -1,5 +1,5 @@
 using UnityEngine;
-
+#if FALSE
 public static class EnemyAI
 {
     private static readonly CombatHandler.CombatChoice[] choices =
@@ -23,3 +23,4 @@ public static class EnemyAI
         else return CombatHandler.CombatChoice.Dodge;
     }
 }
+#endif

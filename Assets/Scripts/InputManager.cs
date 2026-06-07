@@ -12,7 +12,7 @@ public class InputManager : MonoBehaviour
     InventoryHandler inventoryUI;
     InventoryDescription itemDescription;
     Rigidbody playerRigidbody;
-    CombatHandler combatHandler;
+    //CombatHandler combatHandler;
     PlayerHP playerHP;
     
     [Header("Camera")]
@@ -30,7 +30,7 @@ public class InputManager : MonoBehaviour
     public bool openMenu_Input;
     public bool devCombat_Input;
     public bool inventory_Input;
-    public bool devDamage_Input;
+    //public bool devDamage_Input;
 
     [Header("Menu")]
     public GameObject menuCanvas;
@@ -64,7 +64,7 @@ public class InputManager : MonoBehaviour
 
             playerControls.PlayerActions.Inventory.performed += i => inventory_Input = true;
 
-            playerControls.PlayerActions.DevLoseDamage.performed += i => devDamage_Input = true;
+            //playerControls.PlayerActions.DevLoseDamage.performed += i => devDamage_Input = true;
         }
 
         playerControls.Enable();
@@ -82,7 +82,7 @@ public class InputManager : MonoBehaviour
         OpenMenu();
         OpenCombatDevMenu();
         OpenInventory();
-        DevDamageInput();
+        //DevDamageInput();
     }
 
     private void HandleMovementInput()
@@ -110,15 +110,15 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    public void DevDamageInput()
-    {
-        if (devDamage_Input)
-        {
-            devDamage_Input = false;
-            playerHP.Reduce(damage:10);
-            //combatHandler.loseDamage = 1;
-        }
-    }
+    //public void DevDamageInput()
+    //{
+    //    if (devDamage_Input)
+    //    {
+    //        devDamage_Input = false;
+    //        playerHP.Reduce(damage:10);
+    //        //combatHandler.loseDamage = 1;
+    //    }
+    //}
 
     public void OpenMenu()
     {

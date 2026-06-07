@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
-
+#if FALSE
 public class CombatSceneLoader : MonoBehaviour
 {
     public float returnDelay = 3f;
@@ -21,7 +21,8 @@ public class CombatSceneLoader : MonoBehaviour
     {
         yield return new WaitForSeconds(returnDelay);
 
-        string targetScene = PlayerPrefs.GetString("OverworldScene", fallbackScene);
+        string targetScene = PlayerPrefs.GetString("Overworld", fallbackScene);
         SceneManager.LoadScene(targetScene);
     }
 }
+#endif
