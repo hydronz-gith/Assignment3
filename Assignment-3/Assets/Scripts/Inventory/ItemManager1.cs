@@ -7,7 +7,10 @@ using System;
 using UnityEngine.EventSystems;
 using UnityEditor.Rendering;
 
-public class ItemManager : MonoBehaviour, IPointerClickHandler
+// This has been 'quarantined'; old code. 
+
+#if FALSE
+public class ItemManager : MonoBehaviour
     {
         [SerializeField]
         private Image itemImage;
@@ -18,7 +21,12 @@ public class ItemManager : MonoBehaviour, IPointerClickHandler
         [SerializeField]
         private TMP_Text itemName;
 
-        public event Action<ItemManager> OnItemClicked, OnRightMouseBtnClick;
+        InventoryDescription description;
+
+        private string currentItemName = "";
+
+        public event Action<ItemManager> OnItemClicked,
+        OnRightMouseBtnClick;
 
         private bool empty = true;
 
@@ -28,16 +36,21 @@ public class ItemManager : MonoBehaviour, IPointerClickHandler
             Deselect();
         }
 
-        public void ResetData()
+        private void ResetData()
         {
             // This hides the image; may not be necessary
             itemImage.gameObject.SetActive(false);
+            quantityTxt.text = "";
+            currentItemName = "";
             empty = true;
         }
 
-        public void Deselect()
+        private void Deselect()
         {
-            quantityTxt.text = "";
+            if (!empty)
+        {
+            itemName.SetText(currentItemName);
+        }
         }
 
         public void SetData(Sprite sprite, int quantity)
@@ -45,7 +58,12 @@ public class ItemManager : MonoBehaviour, IPointerClickHandler
             itemImage.gameObject.SetActive(true);
             itemImage.sprite = sprite;
             quantityTxt.text = quantity + "";
+            currentItemName = name;
 
+            if(itemName != null)
+        {
+            itemName.SetText(name);
+        }
             empty = false;
         }
 
@@ -55,7 +73,7 @@ public class ItemManager : MonoBehaviour, IPointerClickHandler
 
             if(itemName != null)
         {
-            itemName.SetText($"> {itemName}");
+            itemName.SetText($"> {currentItemName}");
         }
  
         }
@@ -68,10 +86,10 @@ public class ItemManager : MonoBehaviour, IPointerClickHandler
             }
             else
             {                
-                Debug.Log($"[ItemManager] Current Stored name is {itemName}");
+                Debug.Log($"[ItemManager] Current Stored name is {currentItemName}");
                 Select();
                 OnItemClicked?.Invoke(this);
             }
         }
     }
-
+#endif
