@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using Inventory.UI;
 using UnityEngine;
 
+// Referred to as UIInventoryPage in the tutorials
+
     public class InventoryHandler : MonoBehaviour
     {
         InputManager inputmanager;
@@ -12,12 +14,14 @@ using UnityEngine;
         public GameObject inventoryMenu;
 
         [SerializeField]
+        // Referred to as UIInventoryItem in the tutorials
         private ItemManager itemPrefab;
         
         [SerializeField]
         private RectTransform contentPanel;
 
         [SerializeField]
+        // Referred to as UIInventoryDescription in the tutorials
         private InventoryDescription itemDescription;
 
         List<ItemManager> listofItems = new List<ItemManager>();
@@ -25,8 +29,8 @@ using UnityEngine;
         public event Action<int> OnDescriptionRequested,
             OnItemActionRequested;
 
-        //[SerializeField]
-        //private ItemActionPanel actionPanel;
+        [SerializeField]
+        private ItemActionPanel actionPanel;
 
         private void Awake()
         {
@@ -52,8 +56,8 @@ using UnityEngine;
         {
             foreach (var item in listofItems)
             {
-                //item.ResetData();
-                //item.Deselect();
+                itemPrefab.ResetData();
+                itemPrefab.Deselect();
             }
         }
 
@@ -64,7 +68,7 @@ using UnityEngine;
             listofItems[itemIndex].Select();
         }
 
-        public void UpdataData (int itemIndex, Sprite itemImage, int itemQuantity)
+        public void UpdateData(int itemIndex, Sprite itemImage, int itemQuantity)
         {
             if (listofItems.Count > itemIndex)
             {
@@ -93,7 +97,7 @@ using UnityEngine;
 
         public void Show()
         {
-            //inventoryMenu.SetActive(true);
+            inventoryMenu.SetActive(true);
             ResetSelection();
         }
 
@@ -105,27 +109,27 @@ using UnityEngine;
 
         public void AddAction(string actionName, Action performAction)
         {
-            //actionPanel.AddButon(actionName, performAction);
+            actionPanel.AddButon(actionName, performAction);
         }
 
         public void ShowItemAction(int itemIndex)
         {
-            //actionPanel.Toggle(true);
-            //actionPanel.transform.position = listofItems[itemIndex].transform.position;
+            actionPanel.Toggle(true);
+            actionPanel.transform.position = listofItems[itemIndex].transform.position;
         }
 
         private void DeselectAllItems()
         {
             foreach (ItemManager item in listofItems)
             {
-                //item.Deselect();
+                item.Deselect();
             }
-            //actionPanel.Toggle(false);
+            actionPanel.Toggle(false);
         }
 
         public void Hide()
         {
-            //actionPanel.Toggle(false);
+            actionPanel.Toggle(false);
             inventoryMenu.SetActive(false);
     }
 }
